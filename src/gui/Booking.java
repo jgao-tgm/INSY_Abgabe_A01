@@ -80,6 +80,8 @@ public class Booking extends JFrame {
 		
 		
 		
+		
+		
 		//Passenger data
 		westPanel.setBorder(BorderFactory.createTitledBorder("Passenger:"));
 		Box hbp = Box.createHorizontalBox();
