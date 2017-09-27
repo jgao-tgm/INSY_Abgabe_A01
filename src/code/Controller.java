@@ -2,6 +2,7 @@ package code;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -45,11 +46,26 @@ public class Controller implements ActionListener{
 	    		dbc.connect(getServername(),getDatabase(),getUser(),getPassword());
 	    		JOptionPane.showMessageDialog(null, "Connected");
 	    		login.close();
-	    		//booking = new Booking(this);
+	    		
+	    		booking = new Booking(this);
+	    		booking.addItemComboBox(dbc.getAllCountries(), booking.sCountry);
+	    		booking.addItemComboBox(dbc.getAllCountries(), booking.zCountry);
+	    		
 	    		
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	        }
+		}
+		
+		if(e.getSource()==booking.sCountry) {
+			try {
+				booking.addItemComboBox(dbc.getAirports(
+						dbc.getCodeCountry(booking.sCountry.getSelectedItem().toString())), 
+						booking.sAirport);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 

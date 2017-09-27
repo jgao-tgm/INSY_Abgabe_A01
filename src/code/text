@@ -1,3 +1,0 @@
-String db = JOptionPane.showInputDialog(null, "Name of database");
-    		String user = JOptionPane.showInputDialog(null, "User");
-    		String pw = JOptionPane.showInputDialog(null, "Password");
