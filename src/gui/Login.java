@@ -20,7 +20,7 @@ public class Login extends JFrame {
 	public JTextField txtPort;
 	public JTextField txtDatabase;
 	public JTextField txtUser;
-	public JTextField txtPassword;
+	public JPasswordField txtPassword;
 	
 	public JButton connect;
 	
@@ -86,7 +86,7 @@ public class Login extends JFrame {
 		txtUser.setColumns(5);
 		
 		vb1.add(new JLabel("Password: "));
-		txtPassword = new JTextField();
+		txtPassword = new JPasswordField();
 		vb2.add(txtPassword);
 		txtPassword.setColumns(5);
 		

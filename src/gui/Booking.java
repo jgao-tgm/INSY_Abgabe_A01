@@ -27,6 +27,10 @@ public class Booking extends JFrame {
 	public JComboBox hour;
 	public JComboBox minute;
 	
+	public JComboBox year;
+	public JComboBox month;
+	public JComboBox day;
+	
 	public JComboBox flightnr;
 	public JComboBox row;
 	public JComboBox seat;
@@ -58,11 +62,20 @@ public class Booking extends JFrame {
 			cbox.addItem(string[i]);
 		}
 	}
+	
+	public void addFreshItemComboBox(String[] string, JComboBox cbox){
+		int c = string.length;
+		cbox.removeAllItems();
+		
+		for(int i = 0; i < c; i++){
+			cbox.addItem(string[i]);
+		}
+	}
 
 	
 	private void initialize() {
 		this.setTitle("Booking");
-		this.setSize(700, 300);
+		this.setSize(1000, 300);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
@@ -96,9 +109,11 @@ public class Booking extends JFrame {
 		
 		hbf2.add(new JLabel("Departure: "));
 		sCountry = new JComboBox();
-		sCountry.setSize(1,5);
+		sCountry.addItem("--Country--");
+		sCountry.addActionListener(main);
 		sAirport = new JComboBox();
 		sAirport.setSize(1,5);
+		sAirport.addItem("--Airport--");
 		hbf2.add(sCountry);
 		Component hsf1 = Box.createHorizontalStrut(5);
 		hbf2.add(hsf1);
@@ -110,8 +125,11 @@ public class Booking extends JFrame {
 		hbf4.add(new JLabel("Destination: "));
 		zCountry = new JComboBox();
 		zCountry.setSize(1,5);
+		zCountry.addItem("--Country--");
+		zCountry.addActionListener(main);
 		zAirport = new JComboBox();
 		zAirport.setSize(1,5);
+		zAirport.addItem("--Airport--");
 		hbf4.add(zCountry);
 		Component hsf2 = Box.createHorizontalStrut(5);
 		hbf4.add(hsf2);
@@ -181,12 +199,36 @@ public class Booking extends JFrame {
 		hbt1.add(new JLabel(":"));
 		Component hst1 = Box.createHorizontalStrut(5);
 		hbt1.add(hst1);
+		year = new JComboBox();
+		month = new JComboBox();
+		day = new JComboBox();
 		hour = new JComboBox();
 		minute = new JComboBox();
+		hbt1.add(year);
+		Component hst9 = Box.createHorizontalStrut(5);
+		hbt1.add(hst9);
+		hbt1.add(new JLabel("/"));
+		Component hst10 = Box.createHorizontalStrut(5);
+		hbt1.add(hst10);
+		hbt1.add(month);
+		Component hst5 = Box.createHorizontalStrut(5);
+		hbt1.add(hst5);
+		hbt1.add(new JLabel("/"));
+		Component hst6 = Box.createHorizontalStrut(5);
+		hbt1.add(hst6);
+		hbt1.add(day);
+		Component hst7 = Box.createHorizontalStrut(20);
+		hbt1.add(hst7);
+		
 		hbt1.add(hour);
 		Component hst2 = Box.createHorizontalStrut(5);
 		hbt1.add(hst2);
+		hbt1.add(new JLabel(":"));
+		Component hst21 = Box.createHorizontalStrut(5);
+		hbt1.add(hst21);
 		hbt1.add(minute);
+		Component hst3 = Box.createHorizontalStrut(100);
+		hbt1.add(hst3);
 		
 		Component vst1 = Box.createVerticalStrut(20);
 		hbt2.add(vst1);
@@ -194,8 +236,8 @@ public class Booking extends JFrame {
 		hbt3.add(new JLabel("Flight Nr.: "));
 		flightnr = new JComboBox();
 		hbt3.add(flightnr);
-		Component hst3 = Box.createHorizontalStrut(10);
-		hbt3.add(hst3);
+		Component hst4 = Box.createHorizontalStrut(10);
+		hbt3.add(hst4);
 		hbt3.add(new JLabel("Row / Seat: "));
 		row = new JComboBox();
 		hbt3.add(row);

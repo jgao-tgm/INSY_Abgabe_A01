@@ -60,14 +60,23 @@ public class DBConnect {
 	}
 	
 	public static String[] getAirports(String country) throws SQLException{
-		String[] aport = new String[100];
+		int c = 0;
+		
+		Statement stmt1 = con.createStatement();
+		String query1 = "select count(name) from airports where country='"+country+"';";
+		ResultSet res1 = stmt1.executeQuery(query1);
+		while (res1.next()) {
+			c = res1.getInt("count(name)");
+		}
+		
+		String[] aport = new String[c];
 		int i = 0;
 
-		Statement stmt = con.createStatement();
-		String query = "select name from airports where country='"+country+"';";
-		ResultSet res = stmt.executeQuery(query);
-		while (res.next()) {
-			aport[i] = res.getString("name");
+		Statement stmt2 = con.createStatement();
+		String query2 = "select name from airports where country='"+country+"';";
+		ResultSet res2 = stmt2.executeQuery(query2);
+		while (res2.next()) {
+			aport[i] = res2.getString("name");
 			i++;
 		}
 		return aport;
