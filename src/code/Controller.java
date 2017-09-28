@@ -66,6 +66,10 @@ public class Controller implements ActionListener{
 				booking.addFreshItemComboBox(dbc.getAirports(
 						dbc.getCodeCountry(booking.sCountry.getSelectedItem().toString())), 
 						booking.sAirport);
+				booking.addFreshItemComboBox(dbc.getAllFlightNr(
+						dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
+						dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString())), 
+						booking.flightnr);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -73,26 +77,55 @@ public class Controller implements ActionListener{
 		}
 		
 		if(e.getSource()==booking.zCountry) {
+			System.out.print("Actzjv");
 			try {
 				booking.addFreshItemComboBox(dbc.getAirports(
 						dbc.getCodeCountry(booking.zCountry.getSelectedItem().toString())), 
 						booking.zAirport);
+				booking.addFreshItemComboBox(dbc.getAllFlightNr(
+						dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
+						dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString())), 
+						booking.flightnr);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
 		
+		if(e.getSource()==booking.sAirport){
+			try {
+				System.out.println(dbc.getAllFlightNr(
+						dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
+						dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString())
+						).toString());
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		if(e.getSource()==booking.zAirport){
+			try {
+				System.out.println(dbc.getAllFlightNr(
+						dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
+						dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString())
+						).toString());
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		
 		if(e.getSource()==booking.month){
 			booking.addDaysMonth((int)booking.month.getSelectedItem(), 
 					(int)booking.month.getSelectedItem(), booking.day);
 		}
 		if(e.getSource()==booking.ab){
-			
 			try {
 				booking.addFreshItemComboBox(dbc.getFlightNrAb(
-						dbc.getCodeAirport(booking.sCountry.getSelectedItem().toString()), 
-						dbc.getCodeAirport(booking.zCountry.getSelectedItem().toString()), 
+						dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
+						dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString()), 
 						booking.year.getSelectedItem().toString(), 
 						booking.month.getSelectedItem().toString(), 
 						booking.day.getSelectedItem().toString(), 
@@ -102,7 +135,26 @@ public class Controller implements ActionListener{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			
 		}
+		
+		if(e.getSource()==booking.an){
+			try {
+				booking.addFreshItemComboBox(dbc.getFlightNrAn(
+						dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
+						dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString()), 
+						booking.year.getSelectedItem().toString(), 
+						booking.month.getSelectedItem().toString(), 
+						booking.day.getSelectedItem().toString(), 
+						booking.hour.getSelectedItem().toString(), 
+						booking.minute.getSelectedItem().toString()), booking.flightnr);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+		
 	}
 
 	public String getServername() {

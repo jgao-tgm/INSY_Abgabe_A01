@@ -42,6 +42,7 @@ public class Booking extends JFrame {
 	
 	public JRadioButton an;
 	public JRadioButton ab;
+	public ButtonGroup group;
 	
 	public JButton submit;
 	
@@ -65,7 +66,6 @@ public class Booking extends JFrame {
 	
 	public void addFreshItemComboBox(String[] string, JComboBox cbox){
 		int c = string.length;
-		cbox.removeAllItems();
 		
 		for(int i = 0; i < c; i++){
 			cbox.addItem(string[i]);
@@ -151,6 +151,7 @@ public class Booking extends JFrame {
 		sAirport = new JComboBox();
 		sAirport.setSize(1,5);
 		sAirport.addItem("--Airport--");
+		sAirport.addActionListener(main);
 		hbf2.add(sCountry);
 		Component hsf1 = Box.createHorizontalStrut(5);
 		hbf2.add(hsf1);
@@ -167,6 +168,7 @@ public class Booking extends JFrame {
 		zAirport = new JComboBox();
 		zAirport.setSize(1,5);
 		zAirport.addItem("--Airport--");
+		zAirport.addActionListener(main);
 		hbf4.add(zCountry);
 		Component hsf2 = Box.createHorizontalStrut(5);
 		hbf4.add(hsf2);
@@ -228,7 +230,7 @@ public class Booking extends JFrame {
 		
 		ab = new JRadioButton("Ab");
 		an = new JRadioButton("An");
-		ButtonGroup group = new ButtonGroup();
+		group = new ButtonGroup();
 		group.add(ab);
 		group.add(an);
 		ab.addActionListener(main);
@@ -299,6 +301,7 @@ public class Booking extends JFrame {
 		
 		hbt3.add(new JLabel("Flight Nr.: "));
 		flightnr = new JComboBox();
+		flightnr.addActionListener(main);
 		hbt3.add(flightnr);
 		Component hst4 = Box.createHorizontalStrut(10);
 		hbt3.add(hst4);
