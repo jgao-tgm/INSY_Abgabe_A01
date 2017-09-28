@@ -66,7 +66,7 @@ public class Booking extends JFrame {
 	
 	public void addFreshItemComboBox(String[] string, JComboBox cbox){
 		int c = string.length;
-		
+		cbox.removeAllItems();
 		for(int i = 0; i < c; i++){
 			cbox.addItem(string[i]);
 		}
@@ -104,12 +104,11 @@ public class Booking extends JFrame {
 				cbox.addItem(1+f);
 			}
 		}
-			
-		
+
 	}
 
 
-	
+
 	private void initialize() {
 		this.setTitle("Booking");
 		this.setSize(1000, 300);
@@ -326,6 +325,7 @@ public class Booking extends JFrame {
 		
 		submit = new JButton("Submit");
 		southPanel.add(submit);
+		submit.addActionListener(main);
 		
 
 		

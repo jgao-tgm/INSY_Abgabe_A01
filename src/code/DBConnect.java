@@ -177,5 +177,112 @@ public class DBConnect {
 		
 	}
 	
+	public static String getInfoAirline(String flightnr) throws SQLException{
+		String info = "";
+		
+		Statement stmt = con.createStatement();
+		String query = "select airline from flights where flightnr='"+flightnr+"';";
+		ResultSet res = stmt.executeQuery(query);
+		if(res.next()) {
+			info = res.getString("airline");
+		}
+		return info;
+		
+	}
+	
+	
+	public static String getInfoDepTime(String flightnr) throws SQLException{
+		String info = "";
+		
+		Statement stmt = con.createStatement();
+		String query = "select departure_time from flights where flightnr='"+flightnr+"';";
+		ResultSet res = stmt.executeQuery(query);
+		if(res.next()) {
+			info = res.getString("departure_time");
+		}
+		return info;
+		
+	}
+	
+	public static String getInfoDepAir(String flightnr) throws SQLException{
+		String info = "";
+		
+		Statement stmt = con.createStatement();
+		String query = "select departure_airport from flights where flightnr='"+flightnr+"';";
+		ResultSet res = stmt.executeQuery(query);
+		if(res.next()) {
+			info = res.getString("departure_airport");
+		}
+		return info;
+		
+	}
+	
+	public static String getInfoDesTime(String flightnr) throws SQLException{
+		String info = "";
+		
+		Statement stmt = con.createStatement();
+		String query = "select destination_time from flights where flightnr='"+flightnr+"';";
+		ResultSet res = stmt.executeQuery(query);
+		if(res.next()) {
+			info = res.getString("destination_time");
+		}
+		return info;
+		
+	}
+	
+	public static String getInfoDesAir(String flightnr) throws SQLException{
+		String info = "";
+		
+		Statement stmt = con.createStatement();
+		String query = "select destination_airport from flights where flightnr='"+flightnr+"';";
+		ResultSet res = stmt.executeQuery(query);
+		if(res.next()) {
+			info = res.getString("destination_airport");
+		}
+		return info;
+		
+	}
+	
+	public static String getInfoPlane(String flightnr) throws SQLException{
+		String info = "";
+		
+		Statement stmt = con.createStatement();
+		String query = "select planetype from flights where flightnr='"+flightnr+"';";
+		ResultSet res = stmt.executeQuery(query);
+		if(res.next()) {
+			info = res.getString("planetype");
+		}
+		return info;
+		
+	}
+	
+	public int getNextID() throws SQLException{
+		int id = 0;
+		
+		Statement stmt = con.createStatement();
+		String query = "select max(id) from passengers;";
+		ResultSet res = stmt.executeQuery(query);
+		if(res.next()) {
+			id = res.getInt("max(id)")+1;
+		}
+		return id;
+	}
+	
+	public static void savePassenger(String id, String fname, String lname, String air, String flightnr) throws SQLException{
+		Statement stmt = con.createStatement();
+		String insert = "insert into passengers (`id`,`firstname`,`lastname`,`airline`,`flightnr`)"
+				+ "values ("
+				+ "'"+id+"',"
+						+ "'"+fname+"',"
+								+ "'"+lname+"',"
+										+ ""+air+","
+												+ "'"+flightnr+"');";
+		
+		
+		stmt.executeUpdate(insert);
+		
+		System.out.println("Insert complete");
+	}
+	
 	
 }

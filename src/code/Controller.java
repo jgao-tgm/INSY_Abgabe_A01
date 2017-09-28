@@ -43,7 +43,6 @@ public class Controller implements ActionListener{
 			setPassword(login.txtPassword.getText());
 			
 			try {
-
 	    		//dbc.connect(getServername(),getDatabase(),getUser(),getPassword());
 				dbc.connect("localhost","flightdata","root","Aed4ahni");
 	    		JOptionPane.showMessageDialog(null, "Connected");
@@ -66,10 +65,6 @@ public class Controller implements ActionListener{
 				booking.addFreshItemComboBox(dbc.getAirports(
 						dbc.getCodeCountry(booking.sCountry.getSelectedItem().toString())), 
 						booking.sAirport);
-				booking.addFreshItemComboBox(dbc.getAllFlightNr(
-						dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
-						dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString())), 
-						booking.flightnr);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -77,39 +72,10 @@ public class Controller implements ActionListener{
 		}
 		
 		if(e.getSource()==booking.zCountry) {
-			System.out.print("Actzjv");
 			try {
 				booking.addFreshItemComboBox(dbc.getAirports(
 						dbc.getCodeCountry(booking.zCountry.getSelectedItem().toString())), 
 						booking.zAirport);
-				booking.addFreshItemComboBox(dbc.getAllFlightNr(
-						dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
-						dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString())), 
-						booking.flightnr);
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		
-		if(e.getSource()==booking.sAirport){
-			try {
-				System.out.println(dbc.getAllFlightNr(
-						dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
-						dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString())
-						).toString());
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		
-		if(e.getSource()==booking.zAirport){
-			try {
-				System.out.println(dbc.getAllFlightNr(
-						dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
-						dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString())
-						).toString());
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -121,16 +87,39 @@ public class Controller implements ActionListener{
 			booking.addDaysMonth((int)booking.month.getSelectedItem(), 
 					(int)booking.month.getSelectedItem(), booking.day);
 		}
+		
 		if(e.getSource()==booking.ab){
 			try {
-				booking.addFreshItemComboBox(dbc.getFlightNrAb(
+				if(dbc.getFlightNrAb(
 						dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
 						dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString()), 
 						booking.year.getSelectedItem().toString(), 
 						booking.month.getSelectedItem().toString(), 
 						booking.day.getSelectedItem().toString(), 
 						booking.hour.getSelectedItem().toString(), 
-						booking.minute.getSelectedItem().toString()), booking.flightnr);
+						booking.minute.getSelectedItem().toString())!=null){
+					
+					booking.addFreshItemComboBox(dbc.getFlightNrAb(
+							dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
+							dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString()), 
+							booking.year.getSelectedItem().toString(), 
+							booking.month.getSelectedItem().toString(), 
+							booking.day.getSelectedItem().toString(), 
+							booking.hour.getSelectedItem().toString(), 
+							booking.minute.getSelectedItem().toString()), booking.flightnr);
+					booking.txtInfo.setText(
+							"Airline: "+dbc.getInfoAirline(booking.flightnr.getSelectedItem().toString())
+							+"\n Flight Nr:"+booking.flightnr.getSelectedItem().toString()
+							+"\n Departure Time: "+dbc.getInfoDepTime(booking.flightnr.getSelectedItem().toString())
+							+"\n Departure Airport: "+dbc.getInfoDepAir(booking.flightnr.getSelectedItem().toString())
+							+"\n Destination Time: "+dbc.getInfoDesTime(booking.flightnr.getSelectedItem().toString())
+							+"\n Destination Airport: "+dbc.getInfoDesAir(booking.flightnr.getSelectedItem().toString())
+							+"\n Planetyp: "+dbc.getInfoPlane(booking.flightnr.getSelectedItem().toString())
+							);
+				} else {
+					JOptionPane.showMessageDialog(null, "Kein Flug vorhanden");
+				}
+				
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -140,19 +129,56 @@ public class Controller implements ActionListener{
 		
 		if(e.getSource()==booking.an){
 			try {
-				booking.addFreshItemComboBox(dbc.getFlightNrAn(
+				if(dbc.getFlightNrAn(
 						dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
 						dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString()), 
 						booking.year.getSelectedItem().toString(), 
 						booking.month.getSelectedItem().toString(), 
 						booking.day.getSelectedItem().toString(), 
 						booking.hour.getSelectedItem().toString(), 
-						booking.minute.getSelectedItem().toString()), booking.flightnr);
+						booking.minute.getSelectedItem().toString())!=null){
+					
+					booking.addFreshItemComboBox(dbc.getFlightNrAn(
+							dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()), 
+							dbc.getCodeAirport(booking.zAirport.getSelectedItem().toString()), 
+							booking.year.getSelectedItem().toString(), 
+							booking.month.getSelectedItem().toString(), 
+							booking.day.getSelectedItem().toString(), 
+							booking.hour.getSelectedItem().toString(), 
+							booking.minute.getSelectedItem().toString()), booking.flightnr);
+					booking.txtInfo.setText(
+							" Airline: "+dbc.getInfoAirline(booking.flightnr.getSelectedItem().toString())
+							+"\n Flight Nr:"+booking.flightnr.getSelectedItem().toString()
+							+"\n Departure Time: "+dbc.getInfoDepTime(booking.flightnr.getSelectedItem().toString())
+							+"\n Departure Airport: "+dbc.getInfoDepAir(booking.flightnr.getSelectedItem().toString())
+							+"\n Destination Time: "+dbc.getInfoDesTime(booking.flightnr.getSelectedItem().toString())
+							+"\n Destination Airport: "+dbc.getInfoDesAir(booking.flightnr.getSelectedItem().toString())
+							+"\n Planetyp: "+dbc.getInfoPlane(booking.flightnr.getSelectedItem().toString())
+							);
+				} else {
+					JOptionPane.showMessageDialog(null, "Kein Flug vorhanden");
+				}
+				
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
+		}
+		
+		if(e.getSource()==booking.submit){
+			try {
+				System.out.println(dbc.getNextID());
+				
+				dbc.savePassenger(Integer.toString(dbc.getNextID()),
+						booking.txtFname.getText(),
+						booking.txtLname.getText(), 
+						dbc.getInfoAirline(booking.flightnr.getSelectedItem().toString()), 
+						booking.flightnr.getSelectedItem().toString());
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 	}
