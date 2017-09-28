@@ -82,4 +82,46 @@ public class DBConnect {
 		return aport;
 		
 	}
+	
+	public static String getCodeAirport(String airport) throws SQLException{
+		String code = "";
+		Statement stmt = con.createStatement();
+		String query = "select airportcode from airports where name ='"+airport+"';";
+		ResultSet res = stmt.executeQuery(query);
+		while (res.next()) {
+			code = res.getString("airportcode");
+		}
+		return code;
+	}
+	
+	public static String[] getFlightNrAb(String depair, String desair, 
+			String year, String month, String day, 
+			String hour, String minute) throws SQLException{
+		int c = 0;
+		
+		Statement stmt1 = con.createStatement();
+		String query1 = "select count(flightnr) from flights where "
+				+ "departure_time>'"+year+"-"+month+"-"+day+" "+hour+":"+minute
+				+ "and departure_airport='"+depair+"' and destination_airport='"+desair+"';";
+		ResultSet res1 = stmt1.executeQuery(query1);
+		while (res1.next()) {
+			c = res1.getInt("count(flightnr)");
+		}
+		String[] fnr = new String[c];
+		int i = 0;
+
+		Statement stmt2 = con.createStatement();
+		String query2 = "select flightnr from flights where "
+				+ "departure_time>'"+year+"-"+month+"-"+day+" "+hour+":"+minute
+				+ "and departure_airport='"+depair+"' and destination_airport='"+desair+"';";
+		ResultSet res2 = stmt2.executeQuery(query2);
+		while (res2.next()) {
+			fnr[i] = res2.getString("flightnr");
+			i++;
+		}
+		return fnr;
+		
+	}
+	
+	
 }

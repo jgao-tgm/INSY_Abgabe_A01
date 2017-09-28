@@ -32,6 +32,7 @@ public class Controller implements ActionListener{
   
     }
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -43,16 +44,19 @@ public class Controller implements ActionListener{
 			
 			try {
 
-	    		dbc.connect(getServername(),getDatabase(),getUser(),getPassword());
+	    		//dbc.connect(getServername(),getDatabase(),getUser(),getPassword());
+				dbc.connect("localhost","flightdata","root","Aed4ahni");
 	    		JOptionPane.showMessageDialog(null, "Connected");
 	    		login.close();
 	    		
 	    		booking = new Booking(this);
+	    		//bm = new BookingModel();
 	    		booking.addItemComboBox(dbc.getAllCountries(), booking.sCountry);
 	    		booking.addItemComboBox(dbc.getAllCountries(), booking.zCountry);
 	    		
 	    		
 	        } catch (Exception ex) {
+	        	JOptionPane.showMessageDialog(null, "Connection failed");
 	            ex.printStackTrace();
 	        }
 		}
@@ -71,8 +75,29 @@ public class Controller implements ActionListener{
 		if(e.getSource()==booking.zCountry) {
 			try {
 				booking.addFreshItemComboBox(dbc.getAirports(
-						dbc.getCodeCountry(booking.sCountry.getSelectedItem().toString())), 
+						dbc.getCodeCountry(booking.zCountry.getSelectedItem().toString())), 
 						booking.zAirport);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		if(e.getSource()==booking.month){
+			booking.addDaysMonth((int)booking.month.getSelectedItem(), 
+					(int)booking.month.getSelectedItem(), booking.day);
+		}
+		if(e.getSource()==booking.ab){
+			
+			try {
+				booking.addFreshItemComboBox(dbc.getFlightNrAb(
+						dbc.getCodeAirport(booking.sCountry.getSelectedItem().toString()), 
+						dbc.getCodeAirport(booking.zCountry.getSelectedItem().toString()), 
+						booking.year.getSelectedItem().toString(), 
+						booking.month.getSelectedItem().toString(), 
+						booking.day.getSelectedItem().toString(), 
+						booking.hour.getSelectedItem().toString(), 
+						booking.minute.getSelectedItem().toString()), booking.flightnr);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

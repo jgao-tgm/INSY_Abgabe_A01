@@ -71,6 +71,43 @@ public class Booking extends JFrame {
 			cbox.addItem(string[i]);
 		}
 	}
+	
+	public void addDaysMonth(int month, int year, JComboBox cbox){
+		cbox.removeAllItems();
+		if(month == 2 && year % 4 == 0){
+			for(int f=0; f<29; f++){
+				cbox.addItem(1+f);
+			}
+		}
+		else if(month == 2 && year % 4 != 0){
+			for(int f=0; f<29; f++){
+				cbox.addItem(1+f);
+			}
+		}
+		else if(month == 7){
+			for(int f=0; f<31; f++){
+				cbox.addItem(1+f);
+			}
+		} 
+		else if(month % 2 != 0 && month < 7){
+			for(int f=0; f<31; f++){
+				cbox.addItem(1+f);
+			}
+		} 
+		else if(month % 2 == 0 && month > 7){
+			for(int f=0; f<31; f++){
+				cbox.addItem(1+f);
+			}
+		} 
+		else {
+			for(int f=0; f<30; f++){
+				cbox.addItem(1+f);
+			}
+		}
+			
+		
+	}
+
 
 	
 	private void initialize() {
@@ -194,16 +231,43 @@ public class Booking extends JFrame {
 		ButtonGroup group = new ButtonGroup();
 		group.add(ab);
 		group.add(an);
+		ab.addActionListener(main);
+		an.addActionListener(main);
 		hbt1.add(ab);
 		hbt1.add(an);
 		hbt1.add(new JLabel(":"));
 		Component hst1 = Box.createHorizontalStrut(5);
 		hbt1.add(hst1);
 		year = new JComboBox();
+		for(int y=0; y<20; y++){
+			year.addItem(2000+y);
+		}
+		year.addActionListener(main);
 		month = new JComboBox();
+		for(int y=0; y<12; y++){
+			month.addItem(1+y);
+		}
+		month.addActionListener(main);
 		day = new JComboBox();
+		for(int y=0; y<31; y++){
+			day.addItem(1+y);
+		}
 		hour = new JComboBox();
+		for(int y=0; y<24; y++){
+			if(y<10){
+				hour.addItem("0"+y);
+			} else {
+				hour.addItem(y);
+			}
+		}
 		minute = new JComboBox();
+		for(int y=0; y<60; y++){
+			if(y<10){
+				minute.addItem("0"+y);
+			} else {
+				minute.addItem(y);
+			}
+		}
 		hbt1.add(year);
 		Component hst9 = Box.createHorizontalStrut(5);
 		hbt1.add(hst9);

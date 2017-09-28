@@ -42,7 +42,6 @@ public class Login extends JFrame {
 		this.setLayout(new BorderLayout());
 		this.add(centerPanel, BorderLayout.CENTER);
 		
-		
 		JPanel cPanel1 = new JPanel();
 		JPanel cPanel2 = new JPanel();
 		JPanel cPanel3 = new JPanel();
