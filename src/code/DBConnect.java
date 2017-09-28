@@ -93,7 +93,7 @@ public class DBConnect {
 		}
 		return code;
 	}
-	
+	 
 	public static String[] getFlightNrAb(String depair, String desair, 
 			String year, String month, String day, 
 			String hour, String minute) throws SQLException{
