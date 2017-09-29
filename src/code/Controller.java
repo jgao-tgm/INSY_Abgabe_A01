@@ -16,7 +16,7 @@ public class Controller implements ActionListener{
 	private Booking booking;
 	
 	private static String servername;
-	private String port;
+	private static String port;
 	private static String database;
 	private static String user;
 	private static String password;
@@ -38,13 +38,14 @@ public class Controller implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource()==login.connect) {
 			setServername(login.txtServer.getText());
+			setPort(login.txtPort.getText());
 			setDatabase(login.txtDatabase.getText());
 			setUser(login.txtUser.getText());
 			setPassword(login.txtPassword.getText());
 			
 			try {
 	    		//dbc.connect(getServername(),getDatabase(),getUser(),getPassword());
-				dbc.connect("localhost","flightdata","root","Aed4ahni");
+				dbc.connect(servername,port,database,user,password);
 	    		JOptionPane.showMessageDialog(null, "Connected");
 	    		login.close();
 	    		

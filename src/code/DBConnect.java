@@ -9,7 +9,7 @@ public class DBConnect {
 	
 	private static Connection con;
 	
-	public void connect(String port, String db, String user, String pw) throws Exception{
+	public void connect(String host, String port, String db, String user, String pw) throws Exception{
 
 	    if(con != null) return;
 
@@ -20,7 +20,7 @@ public class DBConnect {
 	    }
 
 	    con = DriverManager.getConnection(
-				"jdbc:mysql://"+port+"/"+db+"?autoReconnect=true&useSSL=false", user, pw); 
+				"jdbc:mysql://"+host+":"+port+"/"+db+"?autoReconnect=true&useSSL=false", user, pw); 
 	}
 
 	public void close(){

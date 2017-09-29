@@ -64,7 +64,7 @@ public class Login extends JFrame {
 		Box hb4 = Box.createHorizontalBox();
 		vb1.add(hb4);
 		
-		vb1.add(new JLabel("Servername:Port :"));
+		vb1.add(new JLabel("Host:Port :"));
 		txtServer = new JTextField();
 		hb1.add(txtServer);
 		txtServer.setColumns(5);
