@@ -82,6 +82,47 @@ public class DBConnect {
 		return aport;
 		
 	}
+	public static int getDesAirportCount(String depAir) throws SQLException{
+		int cdc = 0;
+		Statement stmt1 = con.createStatement();
+		String query1 = "select count(destination_airport) from flights where departure_airport='"+depAir+"';";
+		ResultSet res1 = stmt1.executeQuery(query1);
+		if (res1.next()) {
+			cdc = res1.getInt("count(destination_airport)");
+			
+		}
+		return cdc;
+		
+	}
+	
+	public static String getDesAirportCode(String country, String depAir, int count) throws SQLException{
+
+		String desport = "";
+		int i = 0;
+
+		Statement stmt2 = con.createStatement();
+		String query2 = "select destination_airport from flights,airports where departure_airport='"+depAir+"'"
+				+ "and flights.destination_airport=airports.airportcode and airports.country='"+country+"';";
+		ResultSet res2 = stmt2.executeQuery(query2);
+		while (res2.next()) {
+			desport = res2.getString("destination_airport");
+
+		}
+		
+		return desport;
+	}
+	
+	public static String getAirportFromCode(String aircode) throws SQLException{
+		String name = "";
+		int i = 0;
+		Statement stmt = con.createStatement();
+		String query = "select name from airports where airportcode ='"+aircode+"';";
+		ResultSet res = stmt.executeQuery(query);
+		while (res.next()) {
+			name = res.getString("name");
+		}
+		return name;
+	}
 	
 	public static String getCodeAirport(String airport) throws SQLException{
 		String code = "";

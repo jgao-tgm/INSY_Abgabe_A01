@@ -64,6 +64,12 @@ public class Booking extends JFrame {
 		}
 	}
 	
+	public void add1FreshItemComboBox(String string, JComboBox cbox){
+		cbox.removeAllItems();
+		cbox.addItem(string);
+		
+	}
+	
 	public void addFreshItemComboBox(String[] string, JComboBox cbox){
 		int c = string.length;
 		cbox.removeAllItems();

@@ -73,9 +73,20 @@ public class Controller implements ActionListener{
 		
 		if(e.getSource()==booking.zCountry) {
 			try {
-				booking.addFreshItemComboBox(dbc.getAirports(
-						dbc.getCodeCountry(booking.zCountry.getSelectedItem().toString())), 
-						booking.zAirport);
+				if(booking.sAirport.getSelectedItem().toString()=="--Airport--"){
+					booking.addFreshItemComboBox(dbc.getAirports(
+							dbc.getCodeCountry(booking.zCountry.getSelectedItem().toString())), 
+							booking.zAirport);
+				} else {
+					
+					
+					booking.add1FreshItemComboBox(dbc.getAirportFromCode(dbc.getDesAirportCode(
+							dbc.getCodeCountry(booking.zCountry.getSelectedItem().toString()),
+							dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()),
+							dbc.getDesAirportCount(dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString())))), 
+							booking.zAirport);
+				}
+				
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
