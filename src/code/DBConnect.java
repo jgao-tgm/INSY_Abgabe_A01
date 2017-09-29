@@ -275,7 +275,7 @@ public class DBConnect {
 				+ "'"+id+"',"
 						+ "'"+fname+"',"
 								+ "'"+lname+"',"
-										+ ""+air+","
+										+ "'"+air+"',"
 												+ "'"+flightnr+"');";
 		
 		
