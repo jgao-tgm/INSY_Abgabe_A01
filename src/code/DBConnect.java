@@ -112,6 +112,34 @@ public class DBConnect {
 		return desport;
 	}
 	
+	public static String[] getDesCountryCode(String depAir) throws SQLException{
+		int c =  0;
+		
+		Statement stmt1 = con.createStatement();
+		String query1 = "select count(country) from flights,airports where departure_airport='"+depAir+"'"
+				+ "and flights.departure_airport=airports.airportcode;";
+		ResultSet res1 = stmt1.executeQuery(query1);
+		while (res1.next()) {
+			c = res1.getInt("count(country)");
+
+		}
+		String[] desco = new String[c];
+		int i = 0;
+
+		Statement stmt2 = con.createStatement();
+		String query2 = "select country from flights,airports where departure_airport='"+depAir+"'"
+				+ "and flights.departure_airport=airports.airportcode;";
+		ResultSet res2 = stmt2.executeQuery(query2);
+		while (res2.next()) {
+			desco[i] = res2.getString("country");
+			System.out.println(desco[i]);
+			i++;
+		
+		}
+		
+		return desco;
+	}
+	
 	public static String getAirportFromCode(String aircode) throws SQLException{
 		String name = "";
 		int i = 0;

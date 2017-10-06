@@ -80,7 +80,6 @@ public class Controller implements ActionListener{
 							booking.zAirport);
 				} else {
 					
-					
 					booking.add1FreshItemComboBox(dbc.getAirportFromCode(dbc.getDesAirportCode(
 							dbc.getCodeCountry(booking.zCountry.getSelectedItem().toString()),
 							dbc.getCodeAirport(booking.sAirport.getSelectedItem().toString()),
